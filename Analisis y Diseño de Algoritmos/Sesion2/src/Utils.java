@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Random;
 
-public class Util {
+public class Utils {
 	
 	public static int[] createIntArray(int N, int min, int max) {
 		int[] array = new int[N];
