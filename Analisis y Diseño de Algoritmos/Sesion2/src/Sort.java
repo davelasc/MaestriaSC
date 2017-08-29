@@ -44,7 +44,6 @@ public class Sort {
 		return comparaciones;
 	}
 	
-	
 	public static int bubbleSort(int[] array) {
 		boolean swapped = true;
 		int counter = 0;
@@ -103,10 +102,19 @@ public class Sort {
 		System.out.println("Movimientos hechos: " + movimientos);/**/
 		int[] array;
 		int min = -200, max = 200;
-		System.out.println("Elementos en el arreglo;Comparaciones;Movimientos");
-		for(int i = 1000; i <= 60000; i+=1000) {
-			array = Utils.createIntArray(i, min, max);
-			System.out.println(i + ";" + bubbleSort(array) + ";" + movimientos);
+		System.out.println("Elementos en el arreglo;Promedio Comparaciones;Promedio Movimientos");
+		int pMov = 0, pCom = 0;
+		for(int i = 1; i <= 200; i++) {
+			pMov = 0;
+			pCom = 0;
+			for(int j = 1; j <= i *100; j++) {
+				array = Utils.createIntArray(i, min, max);
+				pCom += shellSort(array);
+				pMov += movimientos;
+			}
+			pCom /= (i*100);
+			pMov /= (i*100);
+			System.out.println(i + ";" + pCom + ";" + pMov);
 		}/**/
 	}
 	
