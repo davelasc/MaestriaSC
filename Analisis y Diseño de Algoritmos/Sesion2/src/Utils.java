@@ -13,6 +13,12 @@ public class Utils {
 		return array;
 	}
 	
+	public static void reverseArray(int[] array) {
+		for(int i = 0; i < array.length / 2; i++) {
+			swap(array, i, array.length-i-1);
+		}
+	}
+	
 	public static void printArray(int[] array) {
 		System.out.println(Arrays.toString(array));
 	}
@@ -35,5 +41,9 @@ public class Utils {
 			}
 		}
 		return true;
+	}
+	
+	public static double lg(int N) {
+		return (Math.log(N) / Math.log(2));
 	}
 }

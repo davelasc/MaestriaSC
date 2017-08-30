@@ -95,19 +95,130 @@ public class Sort {
 		return comparaciones;
 	}
 	
-	public static void main(String[] args) {
-		/*/int[] array = new int[] {0,1,2,3,4,5,6,7,8,9};
-		int[] array = new int[] {9,8,7,6,5,4,3,2,1,0};
-		Utils.printArray(array);
+	private static int parent(int index) {
+		return (index - 1) / 2;
+	}
+	
+	private static int leftChild(int index) {
+		return (index * 2) + 1;
+	}
+	
+	private static int rightChild(int index) {
+		return (index * 2) + 2;
+	}
+	
+	public static int heapSort(int[] array) {
+		int comparaciones = 0;
+		movimientos = 0;
+		//Paso 1: Crear el montículo
+		for(int i = 1; i < array.length; i++) {
+			int child = i;
+			int parent = parent(child);
+			
+			while(child > 0 && array[parent] < array[child]) {
+				Utils.swap(array, child, parent);
+				movimientos++;
+				child = parent;
+				parent = parent(child);
+				comparaciones++;
+			}
+			comparaciones++;
+		}
+		
+		//Paso 2: push-down
+		
+		int lastPosition = array.length-1;
+		
+		for(int i = 0; i < array.length-1; i++, lastPosition--) {
+			Utils.swap(array, 0, lastPosition);
+			movimientos++;
+			int parent = 0, lChild = 1, rChild = lastPosition > 2 ? 2 : 1;
+			int maxChild = array[lChild] > array[rChild] ? lChild : rChild;
+			
+			while(array[parent] < array[maxChild] &&
+					maxChild < lastPosition) {
+				Utils.swap(array, parent, maxChild);
+				comparaciones++;
+				movimientos++;
+				parent = maxChild;
+				lChild = leftChild(parent);
+				if(lChild > lastPosition) 
+					break;
+				
+				rChild = rightChild(parent);
+				if(rChild > lastPosition)
+					rChild = lChild;
+				
+				maxChild = array[lChild] > array[rChild] ? lChild : rChild;
+			}
+			comparaciones++;
+		}
+		
+		return comparaciones;
+	}
+	
+	private static void s3() {
+		//int[] array = new int[] {7,8,6,5,12,25,28};
+		//int[] array = new int[] {1,2,3,4,5,6,7};
+		int[] array;
+		int pComR = 0, pMovR = 0, pComA = 0, pMovA = 0, pComI = 0, pMovI = 0;
+		int N = 1000000;
+		for(int i = 0; i < 10; i++) {
+			array = Utils.createIntArray(N, -1000, 1000);
+			pComR += heapSort(array);
+			pMovR += movimientos;
+			
+			pComA += heapSort(array);
+			pMovA += movimientos;
+			
+			Utils.reverseArray(array);
+			pComI += heapSort(array);
+			pMovI += movimientos;
+		}
+		
+		
+		
+		double esperado = 2*N*(Utils.lg(N)-4);
+		double resultado = 0;
+		System.out.println("Valor esperado: " + esperado);
+		
+		pComR /= 10;
+		pMovR /= 10;
+		System.out.println("Random:: Comparaciones: " + pComR + ", Movimientos: " + pMovR);
+		resultado = (pComR * 100) / esperado;
+		System.out.println("Porcentage:: Comparaciones: " + resultado );
+		
+		pComA /= 10;
+		pMovA /= 10;
+		System.out.println("Arreglado:: Comparaciones: " + pComA + ", Movimientos: " + pMovA);
+		resultado = (pComA * 100) / esperado;
+		System.out.println("Porcentage:: Comparaciones: " + resultado);
+		
+		pComI /= 10;
+		pMovI /= 10;
+		System.out.println("Invertido:: Comparaciones: " + pComI + ", Movimientos: " + pMovI);
+		resultado = (pComI * 100) / esperado;
+		System.out.println("Porcentage:: Comparaciones: " + resultado);
+	}
+	
+	
+	
+	private static void s2() {
+		//int[] array = new int[] {0,1,2,3,4,5,6,7,8,9};
+		int[] array = new int[] {9,8,7,6,5,4,3,2,1,0};			
 		System.out.println("Comparaciones hechas: " + shellSort(array));
 		System.out.println("Movimientos hechos: " + movimientos);/**/
-		int[] array;
+		/*int[] array;
 		int min = -200, max = 200;
 		System.out.println("Elementos en el arreglo;Comparaciones;Movimientos");
 		for(int i = 1000; i <= 60000; i+=1000) {
 			array = Utils.createIntArray(i, min, max);
-			System.out.println(i + ";" + bubbleSort(array) + ";" + movimientos);
+		System.out.println(i + ";" + bubbleSort(array) + ";" + movimientos);
 		}/**/
+	}
+	
+	public static void main(String[] args) {
+		s3();
 	}
 	
 }
