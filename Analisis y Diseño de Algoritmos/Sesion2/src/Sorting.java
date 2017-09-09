@@ -1,5 +1,5 @@
 
-public class Sort {
+public class Sorting {
 
 	private static int movimientos = 0;
 	
