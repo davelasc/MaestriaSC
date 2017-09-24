@@ -1,27 +1,21 @@
 import java.util.ArrayDeque;
 
 public class DivideConquer {
+	
 	private static int count = 0;
-	private static int comparaciones = 0;
-	private static int movimientos = 0;
-	
-	
-	public static void main(String[] args) {
-		//testBinarySearch();
-		//testMedian();
-		//testPartition();
-		//testQuickSort();
-		//testMergeSort();
-		//testMergeIte();
-		textBinarySearchPro();
-	}
+	private static int compMerg = 0, compAda = 0;
+	private static int movMerg = 0, movAda = 0;
+	/*
 	
 	public static void textBinarySearchPro() {
-		int[] arr = Utils.createIntArray(10000, 0, 200000);
-		System.out.println(Sorting.heapSort(arr));
-		Utils.isSorted(arr);
-		System.out.println("pos num = " + binarySearchPro(arr, 15));
-		System.out.println("llamadas: " + count);
+		for(int i = 0; i < 100; i++) {
+			int[] arr = Utils.createIntArray(100, -16, 16);
+			System.out.println(Sorting.heapSort(arr));
+			Utils.isSorted(arr);
+			System.out.println("pos num = " + binarySearchPro(arr, i));
+			System.out.println("llamadas: " + count);
+		}
+		
 	}
 	
 	public static int binarySearchPro(int[] arr, int val) {
@@ -46,17 +40,17 @@ public class DivideConquer {
 		if(array[index] == val) 
 			return index;
 		
-		if(index < start || index > end) {
-			return -1;
-		}
+		//if(index < start || index > end) {
+		//	return -1;
+		//}
 		
 		if(val < array[index])
-			return binarySearchPro(array, val, start, index);
+			return binarySearchPro(array, val, start, index-1);
 		else
-			return binarySearchPro(array, val, index, end);
+			return binarySearchPro(array, val, index+1, end);
 		
 	}
-	
+	/**/
 	/*public static int binarySearch(int[] arr, int val) {
 		return binarySearch(arr, val, 0, arr.length);
 	}
@@ -156,33 +150,10 @@ public class DivideConquer {
 		System.out.println("Pivote pos: " + partition(arr, 0, arr.length-1));
 	}
 	/**/
-	/*
-	private static void testMergeSort() {
-		System.out.println("Elementos en el arreglo;Promedio Comparaciones;Promedio Movimientos");
-		//int[] array = {4,1,3,5,6,7,2};
-		//int[] array = {4,1,3,2,6,5,7};
-		int[] array;
-		int pMov = 0, pCom = 0;
-		for(int i = 1; i <= 200; i++) {
-			pMov = 0;
-			pCom = 0;
-			for(int j = 1; j <= i *100; j++) {
-				array = Utils.createIntArray(i, -2000, 2000);
-				mergeSort(array);
-				pMov += movimientos;
-				pCom += comparaciones;
-			}
-			pCom /= (i*100);
-			pMov /= (i*100);
-			System.out.println(i + ";" + pCom + ";" + pMov);
-			//System.out.println(comparaciones);
-		}
-		
-	}
 	
 	private static void mergeSort(int[] array) {
-		comparaciones = 0;
-		movimientos = 0;
+		compMerg = 0;
+		movMerg = 0;
 		mergeSort(array, 0, array.length-1);
 	}
 	
@@ -206,13 +177,13 @@ public class DivideConquer {
 		int i = left, j = mid + 1, k = left;
 		
 		while(i <= mid && j <= right) {
-			comparaciones++;
+			compMerg++;
 			if(helper[i] <= helper[j]) {
-				movimientos++;
+				movMerg++;
 				array[k] = helper[i];
 				i++;
 			} else {
-				movimientos++;
+				movMerg++;
 				array[k] = helper[j];
 				j++;
 			}
@@ -243,13 +214,13 @@ public class DivideConquer {
 			pCom /= (i*100);
 			pMov /= (i*100);
 			//System.out.println(i + ";" + comparaciones + ";" + movimientos);
-			System.out.println(comparaciones);
+			System.out.println(compMerg);
 		}
 		
 	}
 	
 	private static void quickSort(int[] array) {
-		comparaciones = 0;
+		compMerg = 0;
 		quickSort(array, 0, array.length - 1);
 	}
 	
@@ -267,17 +238,17 @@ public class DivideConquer {
 		int i = left - 1;
 		
 		for(int j = left; j <= right; j++) {
-			comparaciones++;
+			compMerg++;
 			if(array[j] < pivot) {
 				i++;
 				Utils.swap(array, j, i);
-				movimientos++;
+				movMerg++;
 			}
 		}
-		comparaciones++;
+		compMerg++;
 		if(array[right] < array[i+1]) {
 			Utils.swap(array, i+1, right);
-			movimientos++;
+			movMerg++;
 		}
 		
 		return i+1;
@@ -327,7 +298,7 @@ public class DivideConquer {
 		}
 		
 	}
-	
+	/*
 	private static void testMergeIte() {
 		int array[] = {10, 9,8,7,6};
 		mergeSortIte(array);
@@ -392,6 +363,53 @@ public class DivideConquer {
 				merge(array, tempArray, left, middle, middle+1, right);
 			}
 			
+		}
+	}
+	/**/
+	public static void main(String[] args) {
+		testProb3ADA();
+		testMergeSort();
+	}
+	
+	private static void testMergeSort() {
+		System.out.println("--------------------Merge sort--------------------");
+		int[] array;// = Utils.createIntArray(10, 0, 10);
+		for(int i = 1; i <= 1000; i++) {
+			array = Utils.createIntArray(i, 0, 10000);
+			mergeSort(array);
+			System.out.println(compMerg + ";" + movMerg + ";" + Utils.isSorted(array));
+		}
+	}
+	
+	public static void testProb3ADA() {
+		System.out.println("--------------------ADA sort--------------------");
+		int[] array;// = Utils.createIntArray(10, 0, 10);
+		for(int i = 1; i <= 1000; i++) {
+			array = Utils.createIntArray(i, 0, 10000);
+			prob3ADA(array);
+			System.out.println(compAda + ";" + movAda + ";" + Utils.isSorted(array));
+		}
+	}
+	
+	public static void prob3ADA(int[] array) {
+		compAda = 0;
+		movAda = 0;
+		prob3ADA(array, 0, array.length-1);
+	}
+	
+	public static void prob3ADA(int[] array, int start, int end) {
+		compAda++;
+		if(array[start] > array[end]) {
+			movAda++;
+			Utils.swap(array, start, end);
+		}
+		
+		if((end - start) > 1) {
+			int index = ((end-start) * 2) / 3;
+			
+			prob3ADA(array, start, start + index);
+			prob3ADA(array, end - index, end);
+			prob3ADA(array, start, start + index);
 		}
 	}
 	

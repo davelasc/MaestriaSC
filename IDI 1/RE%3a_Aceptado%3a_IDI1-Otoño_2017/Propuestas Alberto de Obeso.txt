@@ -1,9 +1,0 @@
-Propuesta 1: creación de cursos virtuales basados en modelos cognitivos
-- los modelos cognitivos son capaces de reproducir el comporamiento humano a nivel de milisegundos detallando las actividades cognitivas, perceptuales y motoras involucradas en generar interacciones complejas con computadoras y otros dispositivos. Estos modelos pueden servir como tutores para cursos virtuales. El modelo cognitivo adapta el proceso de aprendizaje a las características cognitivas del individuo. Se identificará un curso relevante al ecosistema de Jalisco y alienado con la agenda de innovación. Entendimiento de la arquitectura cognitiva ACT-R, diseño experimental para recolección de datos empíricos. 
-
-Propuesta 2: Mapeo de variables demográficas y patrones de consumo a nivel de viviendas. 
-- Usando herramientas GIS como QGIS se identificarán, limpiarán e integrarán datos públicos en una aplicación capaz de identificar patrones de consumo a nivel de hogar. Las fuentes públicas ya han sido identificadas. Hay posibilidad de colaborar en proyecto con empresa líder de telecomunicaciones utilizando la inteligencia de esta herramienta para gobernar a los agentes de campo. 
-
-CV
-Doctor en Inteligencia Artificial con especialidad en modelado cognitivo. 14 años de experiencia en desarrollo de software y 7 años de experiencia desarrollando soluciones relacionadas con la ciencia de datos. Ha realizado varios proyectos relacionados con machine learning para segmentación de visitantes web, planeación de demanda, pronóstico de ventas, optimización de asignación de recursos para el ramo educativo. Amplia experiencia en arquitectura de soluciones, principalmente en el manejo de datos, desde la definición del modelo de datos, la implementación de ETLs, la selección e implementación del módulo de machine learning y la creación de tableros para la visualización. Ha trabajado para HP e Intel y estableció su propia compañía en 2014. 
-https://www.linkedin.com/in/albertodeobeso

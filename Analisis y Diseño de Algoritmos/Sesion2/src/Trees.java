@@ -45,16 +45,50 @@ public class Trees {
 		if(n == null) return;
 		
 		System.out.print(spaces);
-		System.out.println(n.value + ", " + n.index);
+		
 		
 		print(n.left, spaces+" ");
 		print(n.right, spaces+" ");
+		System.out.println(n.value + ", " + n.index);
+	}
+	
+	public static int binaryTreeSearchIT(Node root, int value) {
+		Node current = root;
+		
+		while(current != null) {
+			if(current.value == value) {
+				return current.index;
+			}
+			
+			if(value < current.value)
+				current = current.left;
+			else 
+				current = current.right;
+			
+		}
+		return -1;
+	}
+	
+	public static int binaryTreeSearch(Node root, int value) {
+		if(root == null)
+			return -1;
+		
+		if(root.value == value)
+			return root.index;
+		
+		if(value < root.value)
+			return binaryTreeSearch(root.left, value);
+		else
+			return binaryTreeSearch(root.right, value);
+					
 	}
 	
 	public static void main(String[] args) {
-		int[] array = {3,6,2,9,0,11,1};
+		int[] array = {10,8,15,6,9,7,14,18,16};
 		Node root = createBinaryTree(array);
 		print(root, "");
+		System.out.println("pos : " + binaryTreeSearch(root, 14));
+		
 	}
 	
 }
