@@ -5,8 +5,8 @@ public class DivideConquer {
 	private static int count = 0;
 	private static int compMerg = 0, compAda = 0;
 	private static int movMerg = 0, movAda = 0;
-	/*
 	
+	/*
 	public static void textBinarySearchPro() {
 		for(int i = 0; i < 100; i++) {
 			int[] arr = Utils.createIntArray(100, -16, 16);
@@ -50,8 +50,8 @@ public class DivideConquer {
 			return binarySearchPro(array, val, index+1, end);
 		
 	}
-	/**/
-	/*public static int binarySearch(int[] arr, int val) {
+	
+	public static int binarySearch(int[] arr, int val) {
 		return binarySearch(arr, val, 0, arr.length);
 	}
 	
@@ -160,7 +160,6 @@ public class DivideConquer {
 	private static void mergeSort(int[] array, int left, int right) {
 		if(left < right) {
 			int mid = left + ((right - left) / 2);
-			
 			mergeSort(array, left, mid);
 			mergeSort(array, mid+1, right);
 			merge(array, left, mid, right);
@@ -197,7 +196,7 @@ public class DivideConquer {
 		}
  	}
 	/**/
-	
+	/*
 	private static void testQuickSort() {
 		System.out.println("Elementos en el arreglo;Promedio Comparaciones;Promedio Movimientos");
 		//int[] array = {4,1,3,5,6,7,2};
@@ -298,7 +297,7 @@ public class DivideConquer {
 		}
 		
 	}
-	/*
+	
 	private static void testMergeIte() {
 		int array[] = {10, 9,8,7,6};
 		mergeSortIte(array);
@@ -336,7 +335,7 @@ public class DivideConquer {
 		stack.push(0); //visitado = false
 		int[] tempArray = new int[array.length];
 		while(!stack.isEmpty()) {
-			//extraer lo que está en la pila
+			//extraer lo que estï¿½ en la pila
 			int visited = stack.pop();
 			int right = stack.pop();
 			int left = stack.pop();
@@ -377,7 +376,7 @@ public class DivideConquer {
 		for(int i = 1; i <= 1000; i++) {
 			array = Utils.createIntArray(i, 0, 10000);
 			mergeSort(array);
-			System.out.println(compMerg + ";" + movMerg + ";" + Utils.isSorted(array));
+			System.out.println(i + ";" + compMerg + ";" + movMerg);
 		}
 	}
 	
@@ -387,7 +386,7 @@ public class DivideConquer {
 		for(int i = 1; i <= 1000; i++) {
 			array = Utils.createIntArray(i, 0, 10000);
 			prob3ADA(array);
-			System.out.println(compAda + ";" + movAda + ";" + Utils.isSorted(array));
+			System.out.println(i + ";" + compAda + ";" + movAda);
 		}
 	}
 	

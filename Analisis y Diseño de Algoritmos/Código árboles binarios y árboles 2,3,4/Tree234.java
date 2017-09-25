@@ -1,6 +1,5 @@
+package o2017;
 
-import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Tree234 {
@@ -151,8 +150,16 @@ public class Tree234 {
 						   current = current.getChild(2);  
 					   }
 					}
+					
 				}
+
 			}
+			
+			
+			
+			
+			
+			
 		}
 		
 		return root;
@@ -160,12 +167,7 @@ public class Tree234 {
 	
 	
 	public static void printTree234(Node234 current, String spaces){
-		System.out.println(spaces+ "valor: " + current + "; tipo: " + current.getType() + "; es hoja: " 
-				+ current.isLeaf() + "; indice: " + current.getIndex(0));
-		/*for(int i = 0; i < current.getType()-1; i++) {
-			System.out.println(current.getValue(i) + " ");
-		}/**/
-		
+		System.out.println(spaces+current);
 		if(current.isLeaf()) return;
 		if(current.getType()==4) System.out.println("nodo 4");
 		for(int i=0; i<current.getType(); i++){
@@ -184,46 +186,8 @@ public class Tree234 {
 	
 	public static void main(String[] args) {
 		testTree234();
-		testSearch();
 	}
 	
-	public static void testSearch() {
-		int array[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22};
-		Node234 root = createTree234(array);
-		int value = -1;
-		System.out.println("El indice de " + value + " es " + search(root, value));
-		
-	}
-	
-	public static int search(Node234 node, int value) {
-		
-		for(int i = 0; i < node.getType()-1; i++) {
-			if(node.getValue(i) == value ) {
-				return node.getIndex(0);
-			}
-		}
-		
-		if(node.isLeaf())
-			return -1;
-		
-		if(node.getType() == 2) {
-			if(value < node.getValue(0)) {
-				return search(node.getChild(0), value);
-			} else if(node.children.size() > 1) {
-				return search(node.getChild(1), value);
-			} 
-		} else {
-			if(value < node.getValue(0)) {
-				return search(node.getChild(0), value);
-			} else if(node.children.size() > 1 && value > node.getValue(0) 
-					&& value < node.getValue(1)) {
-				return search(node.getChild(1), value);
-			} else if(node.children.size() > 2 && value > node.getValue(1)) {
-				return search(node.getChild(2), value);
-			} 
-		}
-		return -1;
-	}
 	
 	
 	
