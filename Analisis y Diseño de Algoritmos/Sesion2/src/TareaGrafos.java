@@ -14,14 +14,43 @@ public class TareaGrafos {
 		g.insertEdge(""+v1+v2, ""+v1, ""+v2, false);
 	}/**/
 	
-	public static void main(String[] args) {
-		testProb1();
-	}
-	
 	private static void updateNodes(ArrayList<String> table, String nodo) {
 		if(!table.contains(nodo)) {
 			table.add(nodo);
 		}
+	}
+	
+	public static void main(String[] args) {
+		testProb2();
+	}
+	
+	private static void testProb2() {
+		Scanner sc = new Scanner(System.in);
+		ArrayList<String> nodeList = new ArrayList<String>();
+		
+		int nodos = sc.nextInt();
+		int aristas = sc.nextInt();
+		boolean[][] graph = new boolean[nodos][nodos];
+		String nodoA, nodoB;
+		
+		for(int i = 0; i < nodos; i++) {
+			nodeList.add(Character.toString((char) ('A'+i)));
+		}
+		
+		for(int i = 0; i < aristas; i++) {
+			nodoA = sc.next();
+			nodoB = sc.next();
+			graph[nodeList.indexOf(nodoA)][nodeList.indexOf(nodoB)] = true;
+			graph[nodeList.indexOf(nodoB)][nodeList.indexOf(nodoA)] = true;
+		}
+		//getShortestPath(graph, nodeList);
+		getShortestPath(graph, 0, 1);
+	}
+	
+	private static void getShortestPath(boolean[][] graph, int startingPoint, int endingPoint) {
+		
+		
+		
 	}
 	
 	private static void testProb1() {
@@ -94,5 +123,4 @@ public class TareaGrafos {
 	}
 	
 	
-
 }
