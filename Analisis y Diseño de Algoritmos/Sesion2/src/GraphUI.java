@@ -26,6 +26,16 @@ public class GraphUI<T> {
     	
 	}
 	
+	public void insertEdge(String edgeName, String v1, String v2, String edgeLabel, boolean directed){
+        Edge e = graph.addEdge(edgeName, v1, v2, directed);
+        Node node = graph.getNode(v1);
+        node.addAttribute("ui.label", v1);
+       
+        Node node2 = graph.getNode(v2);
+        node2.addAttribute("ui.label", v2);
+        e.addAttribute("ui.label", edgeLabel);
+	}
+	
 	public void insertNode( String nodeName, int id){
 		graph.addNode(nodeName);
 		Node node = graph.getNode(nodeName);

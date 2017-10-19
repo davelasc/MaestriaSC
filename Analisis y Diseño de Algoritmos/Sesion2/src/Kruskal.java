@@ -108,7 +108,7 @@ public class Kruskal {
 	public static List<Edge> mstKruskal(double[][] graph) {
 		PriorityQueue<Edge> candidates = new PriorityQueue<Edge>();
 		List<Edge> mst = new ArrayList<Edge>(graph.length-1);
-		
+		double suma = 0;
 		//Init la lista de edges
 		for(int i = 0; i < graph.length; i++) {
 			for(int j = i + 1; j < graph[0].length; j++) {
@@ -135,8 +135,10 @@ public class Kruskal {
 			Edge minEdge = candidates.poll();
 			if(join(parents, ranks, minEdge.v1, minEdge.v2)) {
 				mst.add(minEdge);
+				suma += minEdge.weight;
 			}
 		}
+		System.out.println("Suma: " + suma);
 		
 		return mst;
 	}
