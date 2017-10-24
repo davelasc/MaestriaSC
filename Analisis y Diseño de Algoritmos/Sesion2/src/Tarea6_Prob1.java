@@ -3,10 +3,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Scanner;
 
 public class Tarea6_Prob1 {
 	
-	public static GraphUI g = new GraphUI(); 
 	public static double INF = Double.MAX_VALUE;
 	static String names[] = {"A", "B", "C", "D", "E", "F", "G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 	static HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -31,7 +31,7 @@ public class Tarea6_Prob1 {
 	}
 	
 	public static void setEdge(double[][]graph, String v1, String v2, double value){
-		g.insertEdge(v1+v2, v1,v2, false);
+		//g.insertEdge(v1+v2, v1,v2, false);
 		setEdge(graph, map.get(v1), map.get(v2), value);
 		
 	}
@@ -85,7 +85,7 @@ public class Tarea6_Prob1 {
 	public static boolean join(int[] parents, int[] ranks, int i, int j) {
 		int leaderI = findLeader(parents, i);
 		int leaderJ = findLeader(parents, j);
-		
+		int prevLeader = 0, newLeader = 0;
 		if(leaderI == leaderJ) {
 			return false;
 		}
@@ -95,76 +95,108 @@ public class Tarea6_Prob1 {
 		
 		if(rankLeaderI > rankLeaderJ || 
 				(rankLeaderI == rankLeaderJ && leaderI > leaderJ)) {
+			prevLeader = parents[j];
+			newLeader = leaderI;
 			parents[j] = leaderI;
 			ranks[leaderI] += ranks[leaderJ];
 		} else {
+			prevLeader = parents[i];
+			newLeader = leaderJ;
 			parents[i] = leaderJ;
 			ranks[leaderJ] += ranks[leaderI];
+		}
+		
+		for(int k = 0; k < parents.length; k++) {
+			if(parents[k] == prevLeader) {
+				parents[k] = newLeader;
+			}
 		}
 		
 		return true;
 	}
 	
-	public static List<Edge> mstKruskal(double[][] graph) {
-		PriorityQueue<Edge> candidates = new PriorityQueue<Edge>();
+	public static void mstKruskal(double[][] graph, PriorityQueue<Edge> candidates, int[] parents, int[] ranks, boolean check) {
 		List<Edge> mst = new ArrayList<Edge>(graph.length-1);
-		double suma = 0;
-		//Init la lista de edges
-		for(int i = 0; i < graph.length; i++) {
-			for(int j = i + 1; j < graph[0].length; j++) {
-				if(graph[i][j] != INF) {
-					Edge e = new Edge(i, j, graph[i][j]);
-					candidates.offer(e);
+		
+		while(mst.size() < graph.length-1 && candidates.size() > 0) {
+			Edge minEdge = candidates.poll();
+			boolean added = true;
+			if(join(parents, ranks, minEdge.v1, minEdge.v2)) {
+				mst.add(minEdge);
+				added = true;
+			}else {
+				added = false;
+			}
+			
+			if(check) {
+				System.out.print(added ? "T " : "F ");
+				for(int i = 0; i < ranks.length; i++) {
+					if(parents[i] == parents[minEdge.v1]) {
+						System.out.print(names[i]);
+					}
 				}
+				System.out.println();
 			}
 		}
-		
-		int parents[] = new int[graph.length];
-		//Inicialmente cada uno es padre de si mismo
+	}
+	
+	public static int[] initParents(int length) {
+		int[] parents = new int[length];
 		for(int i = 0; i < parents.length; i++) {
 			parents[i] = i;
 		}
-		
-		int ranks[] = new int[graph.length];
+		return parents;
+	}
+	
+	public static int[] initRanks(int length) {
+		int[] ranks = new int[length];
 		//Inicialmente cada uno es padre de si mismo
 		for(int i = 0; i < ranks.length; i++) {
 			ranks[i] = 1;
 		}
-		
-		while(mst.size() < graph.length-1) {
-			Edge minEdge = candidates.poll();
-			if(join(parents, ranks, minEdge.v1, minEdge.v2)) {
-				mst.add(minEdge);
-				suma += minEdge.weight;
-			}
+		return ranks;
+	}
+	
+	public static void initCandidates(double[][] graph, String a, String b, PriorityQueue<Edge> candidates) {
+		int i = map.get(a);
+		int j = map.get(b);
+		if(graph[i][j] != INF) {
+			Edge e = new Edge(i, j, graph[i][j]);
+			candidates.offer(e);
 		}
-		System.out.println("Suma: " + suma);
-		
-		return mst;
 	}
 	
 	public static void main(String[] args) {
-		double[][] graph = initGraph(9, INF);
-		setEdge(graph, "A", "B", 3);
-		setEdge(graph, "A", "H", 4);
-		setEdge(graph, "A", "I", 5);
-		setEdge(graph, "B", "C", 7);
-		setEdge(graph, "B", "I", 7);
-		setEdge(graph, "I", "D", 8);
-		setEdge(graph, "I", "H", 3);
-		setEdge(graph, "C", "D", 6);
-		setEdge(graph, "D", "E", 2);
-		setEdge(graph, "D", "F", 1);
-		setEdge(graph, "H", "G", 4);
-		setEdge(graph, "G", "F", 8);
+		Scanner sc = new Scanner(System.in);
 		
-		g.displayGraph();
+		int inversionistas = sc.nextInt();
+		int colaboradores = sc.nextInt();
 		
-		List<Edge> mst = mstKruskal(graph);
-		System.out.println(mst);
-		for(Edge e : mst) {
-			g.setSelectedEdge(""+names[e.v1]+names[e.v2]);
-			g.setSelectedEdge(""+names[e.v2]+names[e.v1]);
+		double[][] graph = initGraph(inversionistas, INF);
+		
+		int ranks[] = initRanks(graph.length);
+		int parents[] = initParents(graph.length);
+		PriorityQueue<Edge> candidates =  new PriorityQueue<Edge>();
+		String a, b;
+		for(int i = 0; i < colaboradores; i++) {
+			a = sc.next();
+			b = sc.next();
+			setEdge(graph, a, b, 1);
+			initCandidates(graph, a, b, candidates);
 		}
+		 
+		mstKruskal(graph, candidates, parents, ranks, false);
+		
+		int opciones = sc.nextInt();
+		for(int i = 0; i < opciones; i++) {
+			a = sc.next();
+			b = sc.next();
+			setEdge(graph, a, b, 2);
+			initCandidates(graph, a, b, candidates);
+			mstKruskal(graph, candidates, parents, ranks, true);
+		}
+		
+		
+		
 	}
 }
