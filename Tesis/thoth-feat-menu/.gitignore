@@ -1,0 +1,6 @@
+meta.json
+*.pyc
+.swp
+*.html
+src/
+__pycache__

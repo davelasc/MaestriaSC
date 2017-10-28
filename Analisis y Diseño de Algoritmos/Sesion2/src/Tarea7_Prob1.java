@@ -78,11 +78,13 @@ public class Tarea7_Prob1 {
 		}
 		
 		String path = "";
+		double distance = distances[end];
 		while(end != -1) {
 			path = names[end] + "" + path;
 			end = voyage[end];
 		}
-		System.out.println(path);
+		System.out.println(Arrays.toString(voyage));
+		System.out.println(path + " " + distance);
 	}
 	
 	public static void main(String[] args) {

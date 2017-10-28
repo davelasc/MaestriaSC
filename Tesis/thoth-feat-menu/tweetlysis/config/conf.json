@@ -1,0 +1,5 @@
+{
+    "DATA_PATH": "data",
+    "CONFIG_PATH": "config",
+    "DEBUG": "True"
+}

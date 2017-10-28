@@ -1,0 +1,26 @@
+### Requirements for Tweet-lysis ####
+
+# GUI
+
+
+# Core API of the app
+# tweepy
+# Replaced tweepy for custom version
+git+git://github.com/a-rmz/tweepy.git#egg=tweepy
+
+# Plotting APIs
+ipython
+plotly
+xhtml2pdf
+# Might no longer be required...
+numpy
+matplotlib
+#
+
+# Natural Language Processing
+nltk
+botornot
+
+# Other APIs
+# For Slack integration
+slacker
