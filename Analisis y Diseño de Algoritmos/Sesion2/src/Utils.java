@@ -30,7 +30,7 @@ public class Utils {
 			array[index1] = array[index2];
 			array[index2] = temp;
 		} else {
-			System.out.println("Cannot swap the values with the given indexes");
+			//System.out.println("Cannot swap the values with the given indexes");
 		}
 	}
 	
